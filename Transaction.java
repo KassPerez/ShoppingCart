@@ -1,3 +1,12 @@
+/*Kassandra Perez
+ *EID: kap2589
+ *
+ *Rohan Tanna
+ *EID: rrt494
+ *
+ *EE422C-Assignment 2
+ */
+
 package Assignment3;
 
 import java.util.ArrayList;
@@ -39,96 +48,158 @@ public class Transaction
 					break;
 				
 				case("update"):
-					name = temp[1];
-					quantity = Integer.parseInt(temp[2]);
-					if(quantity < 0)
-					{
-						invalidInput = true;
-					}
 					if(temp.length > 3)
 					{
 						invalidInput = true;
 					}
+					else
+					{
+						name = temp[1];
+						quantity = Integer.parseInt(temp[2]);
+						if(quantity < 0)
+						{
+							invalidInput = true;
+						}
+					}					
 					break;
 					
 				case("delete"):
-					name = temp[1];
 					if(temp.length > 2)
 					{
 						invalidInput = true;
+					}
+					else
+					{
+						name = temp[1];
 					}
 					break;
 				
 				case("search"):
-					name = temp[1];
 					if(temp.length > 2)
 					{
 						invalidInput = true;
 					}
+					else
+					{
+						name = temp[1];
+					}
 					break;
 				
 				case("insert"):
-					category = temp[1].toLowerCase();
-					if(!isCategory(category))
+					if(!temp[1].isEmpty())
 					{
-						invalidInput = true;
-					}
-					name = temp[2];
-					price = Float.parseFloat(temp[3]);
-					if(price < 0)
-					{
-						invalidInput = true;
-					}
-					float tempQuantity =  Float.parseFloat(temp[4]);
-					quantity = (int) tempQuantity;
-					if(quantity < 0)
-					{
-						invalidInput = true;
-					}
-					float tempWeight =  Float.parseFloat(temp[5]);
-					weight = (int) tempWeight;
-					if(weight < 0)
-					{
-						invalidInput = true;
-					}
-					if(category.equals("electronics"))
-					{
-						optionalField1 = temp[6].toUpperCase();
-						if(!optionalField1.equals("F") && !optionalField1.equals("NF"))
+						category = temp[1].toLowerCase();
+						if(!isCategory(category))
 						{
 							invalidInput = true;
 						}
-						optionalField2 = temp[7].toUpperCase();
-						if(!isState(optionalField2))
+						switch(category)
 						{
-							invalidInput = true;
-						}
-						if(temp.length > 8)
-						{
-							invalidInput = true;
-						}
-					}
-					else if(category.equals("groceries"))
-					{
-						optionalField2 = temp[6].toUpperCase();
-						if(!optionalField1.equals("P") && !optionalField1.equals("NP"))
-						{
-							invalidInput = true;
-						}
-						if(temp.length > 7)
-						{
-							invalidInput = true;
+							case("electronics"):
+								if(temp.length > 8)
+								{
+									invalidInput = true;
+								}
+								else
+								{
+									name = temp[2];
+									price = Float.parseFloat(temp[3]);
+									if(price < 0)
+									{
+										invalidInput = true;
+									}
+									float tempQuantity =  Float.parseFloat(temp[4]);
+									quantity = (int) tempQuantity;
+									if(quantity < 0)
+									{
+										invalidInput = true;
+									}
+									float tempWeight =  Float.parseFloat(temp[5]);
+									weight = (int) tempWeight;
+									if(weight < 0)
+									{
+										invalidInput = true;
+									}
+									optionalField1 = temp[6].toUpperCase();
+									if(!optionalField1.equals("F") && !optionalField1.equals("NF"))
+									{
+										invalidInput = true;
+									}
+									optionalField2 = temp[7].toUpperCase();
+									if(!isState(optionalField2))
+									{
+										invalidInput = true;
+									}
+								}
+								break;
+							case("groceries"):
+								if(temp.length > 7)
+								{
+									invalidInput = true;
+								}
+								else
+								{
+									name = temp[2];
+									price = Float.parseFloat(temp[3]);
+									if(price < 0)
+									{
+										invalidInput = true;
+									}
+									float tempQuantity =  Float.parseFloat(temp[4]);
+									quantity = (int) tempQuantity;
+									if(quantity < 0)
+									{
+										invalidInput = true;
+									}
+									float tempWeight =  Float.parseFloat(temp[5]);
+									weight = (int) tempWeight;
+									if(weight < 0)
+									{
+										invalidInput = true;
+									}
+									optionalField1 = temp[6].toUpperCase();
+									if(!optionalField1.equals("P") && !optionalField1.equals("NP"))
+									{
+										invalidInput = true;
+									}
+								}
+								break;
+							case("clothing"):
+								if(temp.length > 6)
+								{
+									invalidInput = true;
+								}
+								else
+								{
+									name = temp[2];
+									price = Float.parseFloat(temp[3]);
+									if(price < 0)
+									{
+										invalidInput = true;
+									}
+									float tempQuantity =  Float.parseFloat(temp[4]);
+									quantity = (int) tempQuantity;
+									if(quantity < 0)
+									{
+										invalidInput = true;
+									}
+									float tempWeight =  Float.parseFloat(temp[5]);
+									weight = (int) tempWeight;
+									if(weight < 0)
+									{
+										invalidInput = true;
+									}
+								}
+								
+								break;
 						}
 					}
 					else
 					{
-						if(temp.length > 6)
-						{
-							invalidInput = true;
-						}
+						invalidInput = true;
 					}
 					break;
-				}
+			}
 		}
 		catch(ArrayIndexOutOfBoundsException e)
 		{
@@ -194,19 +265,19 @@ public class Transaction
 				processInsert(shoppingCart);
 				break;
 			case("search"):
-				System.out.println("Search: ");
+				System.out.println(" - Search: ");
 				processSearch(shoppingCart);
 				break;
 			case("delete"):
-				System.out.println("Delete: ");
+				System.out.println(" - Delete: ");
 				processDelete(shoppingCart);
 				break;
 			case("update"):
-				System.out.println("Update: ");
+				System.out.println(" - Update: ");
 				processUpdate(shoppingCart);
 				break;
 			case("print"):
-				System.out.println("Print");
+				System.out.println(" - Print: ");
 				processPrint(shoppingCart);
 				break;
 		}
@@ -244,27 +315,34 @@ public class Transaction
 	
 	public void processDelete(ArrayList<Item> shoppingCart)
 	{
-		for(int i = 0;i < shoppingCart.size();i++)
-		{
-			if(shoppingCart.get(i).name.equals(name))
-			{
-				shoppingCart.get(i).printItemAttributes();
-				shoppingCart.remove(i);
-			}
-		}
-	}
-	
-	public void processSearch(ArrayList<Item> shoppingCart)
-	{
+		int numOfItems = 0;
 		Iterator<Item> i = shoppingCart.iterator();
 		while (i.hasNext()) 
 		{
 			Item temp = i.next();
 			if(temp.name.equals(name))
 			{
-				temp.printItemAttributes();
+				numOfItems += 1;
+				shoppingCart.remove(temp);
+				i = shoppingCart.iterator();
 			}
 		}
+		System.out.println("There were " + numOfItems + " " + name + " deleted.");
+	}
+	
+	public void processSearch(ArrayList<Item> shoppingCart)
+	{
+		int numOfItems = 0;
+		Iterator<Item> i = shoppingCart.iterator();
+		while (i.hasNext()) 
+		{
+			Item temp = i.next();
+			if(temp.name.equals(name))
+			{
+				numOfItems += 1;
+			}
+		}
+		System.out.println("There are " + numOfItems + " " + name + " in the shopping cart.");
 	}
 	
 	public void processUpdate(ArrayList<Item> shoppingCart)

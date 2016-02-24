@@ -1,3 +1,12 @@
+/*Kassandra Perez
+ *EID: kap2589
+ *
+ *Rohan Tanna
+ *EID: rrt494
+ *
+ *EE422C-Assignment 2
+ */
+
 package Assignment3;
 
 import java.io.BufferedReader;
@@ -37,7 +46,7 @@ public class ShoppingCartDriver
 				}
 				else
 				{
-					System.err.println("Invalid Input");
+					System.err.println("Invalid Input: " + s);
 				}
 			}
 		} 
