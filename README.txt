@@ -14,7 +14,6 @@ comment: I think we commited to github incorrectly so this is who did what:
 	  ~ Kassandra Perez:
 		- Coded Driver and Transaction classes
 		- added total cost of item to the print attibute methods 
-			(I think this is why github says i did all the work)
 		- functional block diagram and algorithm
 	  ~ Roha Tanna:
 		- Coded Item, Groceries, Clothing and Electronics classes
