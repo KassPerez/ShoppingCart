@@ -4,7 +4,7 @@
  *Rohan Tanna
  *EID: rrt494
  *
- *EE422C-Assignment 2
+ *EE422C-Assignment 3
  */
 
 package Assignment3;
@@ -46,7 +46,7 @@ public class ShoppingCartDriver
 				}
 				else
 				{
-					System.err.println("Invalid Input: " + s);
+					System.err.println("Invalid Input: " + "" + s + "");
 				}
 			}
 		} 

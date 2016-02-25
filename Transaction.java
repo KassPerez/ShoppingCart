@@ -4,7 +4,7 @@
  *Rohan Tanna
  *EID: rrt494
  *
- *EE422C-Assignment 2
+ *EE422C-Assignment 3
  */
 
 package Assignment3;
@@ -55,7 +55,15 @@ public class Transaction
 					else
 					{
 						name = temp[1];
-						quantity = Integer.parseInt(temp[2]);
+						try
+						{
+							quantity = Integer.parseInt(temp[2]);
+						}
+						catch(NumberFormatException e)
+						{
+							invalidInput = true;
+							return;
+						}
 						if(quantity < 0)
 						{
 							invalidInput = true;
@@ -103,32 +111,40 @@ public class Transaction
 								else
 								{
 									name = temp[2];
-									price = Float.parseFloat(temp[3]);
-									if(price < 0)
+									try
 									{
-										invalidInput = true;
+										price = Float.parseFloat(temp[3]);
+										if(price < 0)
+										{
+											invalidInput = true;
+										}
+										float tempQuantity =  Float.parseFloat(temp[4]);
+										quantity = (int) tempQuantity;
+										if(quantity < 0)
+										{
+											invalidInput = true;
+										}
+										float tempWeight =  Float.parseFloat(temp[5]);
+										weight = (int) tempWeight;
+										if(weight < 0)
+										{
+											invalidInput = true;
+										}
+										optionalField1 = temp[6].toUpperCase();
+										if(!optionalField1.equals("F") && !optionalField1.equals("NF"))
+										{
+											invalidInput = true;
+										}
+										optionalField2 = temp[7].toUpperCase();
+										if(!isState(optionalField2))
+										{
+											invalidInput = true;
+										}
 									}
-									float tempQuantity =  Float.parseFloat(temp[4]);
-									quantity = (int) tempQuantity;
-									if(quantity < 0)
+									catch(NumberFormatException e)
 									{
 										invalidInput = true;
-									}
-									float tempWeight =  Float.parseFloat(temp[5]);
-									weight = (int) tempWeight;
-									if(weight < 0)
-									{
-										invalidInput = true;
-									}
-									optionalField1 = temp[6].toUpperCase();
-									if(!optionalField1.equals("F") && !optionalField1.equals("NF"))
-									{
-										invalidInput = true;
-									}
-									optionalField2 = temp[7].toUpperCase();
-									if(!isState(optionalField2))
-									{
-										invalidInput = true;
+										return;
 									}
 								}
 								break;
@@ -139,28 +155,36 @@ public class Transaction
 								}
 								else
 								{
-									name = temp[2];
-									price = Float.parseFloat(temp[3]);
-									if(price < 0)
+									try
 									{
-										invalidInput = true;
+										name = temp[2];
+										price = Float.parseFloat(temp[3]);
+										if(price < 0)
+										{
+											invalidInput = true;
+										}
+										float tempQuantity =  Float.parseFloat(temp[4]);
+										quantity = (int) tempQuantity;
+										if(quantity < 0)
+										{
+											invalidInput = true;
+										}
+										float tempWeight =  Float.parseFloat(temp[5]);
+										weight = (int) tempWeight;
+										if(weight < 0)
+										{
+											invalidInput = true;
+										}
+										optionalField1 = temp[6].toUpperCase();
+										if(!optionalField1.equals("P") && !optionalField1.equals("NP"))
+										{
+											invalidInput = true;
+										}
 									}
-									float tempQuantity =  Float.parseFloat(temp[4]);
-									quantity = (int) tempQuantity;
-									if(quantity < 0)
+									catch(NumberFormatException e)
 									{
 										invalidInput = true;
-									}
-									float tempWeight =  Float.parseFloat(temp[5]);
-									weight = (int) tempWeight;
-									if(weight < 0)
-									{
-										invalidInput = true;
-									}
-									optionalField1 = temp[6].toUpperCase();
-									if(!optionalField1.equals("P") && !optionalField1.equals("NP"))
-									{
-										invalidInput = true;
+										return;
 									}
 								}
 								break;
@@ -171,26 +195,33 @@ public class Transaction
 								}
 								else
 								{
-									name = temp[2];
-									price = Float.parseFloat(temp[3]);
-									if(price < 0)
+									try
 									{
-										invalidInput = true;
+										name = temp[2];
+										price = Float.parseFloat(temp[3]);
+										if(price < 0)
+										{
+											invalidInput = true;
+										}
+										float tempQuantity =  Float.parseFloat(temp[4]);
+										quantity = (int) tempQuantity;
+										if(quantity < 0)
+										{
+											invalidInput = true;
+										}
+										float tempWeight =  Float.parseFloat(temp[5]);
+										weight = (int) tempWeight;
+										if(weight < 0)
+										{
+											invalidInput = true;
+										}
 									}
-									float tempQuantity =  Float.parseFloat(temp[4]);
-									quantity = (int) tempQuantity;
-									if(quantity < 0)
+									catch(NumberFormatException e)
 									{
 										invalidInput = true;
-									}
-									float tempWeight =  Float.parseFloat(temp[5]);
-									weight = (int) tempWeight;
-									if(weight < 0)
-									{
-										invalidInput = true;
+										return;
 									}
 								}
-								
 								break;
 						}
 					}
@@ -315,34 +346,45 @@ public class Transaction
 	
 	public void processDelete(ArrayList<Item> shoppingCart)
 	{
-		int numOfItems = 0;
+		boolean deleted = false;
 		Iterator<Item> i = shoppingCart.iterator();
 		while (i.hasNext()) 
 		{
 			Item temp = i.next();
 			if(temp.name.equals(name))
 			{
-				numOfItems += 1;
+				System.out.println("There were " + temp.quantity  + " " + name + " at $" + String.format("%.2f",temp.price) + " each.");
 				shoppingCart.remove(temp);
 				i = shoppingCart.iterator();
+				deleted = true;
 			}
 		}
-		System.out.println("There were " + numOfItems + " " + name + " deleted.");
+		
+		if(deleted == false)
+		{
+			System.out.println("There are no " + name + " in the shopping cart.");
+		}
+		
 	}
 	
 	public void processSearch(ArrayList<Item> shoppingCart)
 	{
-		int numOfItems = 0;
+		boolean searched = false;
 		Iterator<Item> i = shoppingCart.iterator();
 		while (i.hasNext()) 
 		{
 			Item temp = i.next();
 			if(temp.name.equals(name))
 			{
-				numOfItems += 1;
+				System.out.println("There are " + temp.quantity  + " " + name + " at $" + String.format("%.2f",temp.price) + " each.");
+				searched = true;
 			}
 		}
-		System.out.println("There are " + numOfItems + " " + name + " in the shopping cart.");
+		
+		if(searched == false)
+		{
+			System.out.println("There are no " + name + " in the shopping cart.");
+		}
 	}
 	
 	public void processUpdate(ArrayList<Item> shoppingCart)
@@ -351,14 +393,14 @@ public class Transaction
 		while (i.hasNext()) 
 		{
 			Item temp = i.next();
-			if(temp.name.equals(this.name))
+			if(temp.name.equals(name))
 			{
-				temp.quantity = this.quantity;
+				temp.quantity = quantity;
 				temp.printItemAttributes();
 				return;
 			}
 		}
-		
+		System.out.println("There are no " + name + "in the shopping cart.");
 	}
 	
 	public void processPrint(ArrayList<Item> shoppingCart)
@@ -370,7 +412,7 @@ public class Transaction
 			Item temp = i.next();
 			temp.printItemAttributes();
 		}
-		System.out.println("The Total Price: $" + totalPrice(shoppingCart));
+		System.out.println(" ++++ The Total Price: $" + String.format("%.2f",totalPrice(shoppingCart)));
 	}
 	
 	public float totalPrice(ArrayList<Item> shoppingCart)
